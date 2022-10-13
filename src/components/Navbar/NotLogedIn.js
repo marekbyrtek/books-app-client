@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, MenuItem, Menu, Button, Tooltip, IconButton, ListItemIcon, ListItemButton, styled } from '@mui/material';
 import { AccountCircle, Login, PersonAddAlt } from "@mui/icons-material";
 
@@ -22,6 +22,7 @@ const UserIcon = styled(Box)(({ theme }) => ({
 const NotLogedIn = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate();
   
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -39,6 +40,7 @@ const NotLogedIn = () => {
             <UserIcon>
                 <Tooltip title="Account">
                     <IconButton
+                        color="inherit"
                         onClick={handleClick}
                         size="small"
                         aria-controls={open ? "account-menu" : undefined}
@@ -84,7 +86,7 @@ const NotLogedIn = () => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
                     <MenuItem>
-                        <ListItemButton as={Link} to="/login">
+                        <ListItemButton onClick={() => navigate("/login")}>
                             <ListItemIcon>
                                 <Login />
                             </ListItemIcon>
@@ -92,7 +94,7 @@ const NotLogedIn = () => {
                         </ListItemButton>
                     </MenuItem>
                     <MenuItem>
-                        <ListItemButton as={Link} to="/register">
+                        <ListItemButton onClick={() => navigate("/register")}>
                             <ListItemIcon>
                                 <PersonAddAlt />
                             </ListItemIcon>
