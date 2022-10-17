@@ -12,27 +12,27 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block"} }}>
       <Box position="fixed">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate("/login")}>
-              <ListItemIcon>
-                <Home />
-              </ListItemIcon>
-              <ListItemText primary="Homepage" />
-            </ListItemButton>
-          </ListItem>
-          <AdminLink />
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DarkMode />
-              </ListItemIcon>
-              <Switch checked={mode === "dark"} onChange={() => setMode(mode === "light" ? "dark" : "light")} />
-            </ListItemButton>
-          </ListItem>
-        </List>
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => navigate("/")}>
+                <ListItemIcon>
+                  <Home />
+                </ListItemIcon>
+                <ListItemText primary="Homepage" />
+              </ListItemButton>
+            </ListItem>
+            <AdminLink />
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DarkMode />
+                </ListItemIcon>
+                <Switch checked={mode === "dark"} onChange={() => setMode(mode === "light" ? "dark" : "light")} />
+              </ListItemButton>
+            </ListItem>
+          </List>
       </Box>
     </Box>
   )

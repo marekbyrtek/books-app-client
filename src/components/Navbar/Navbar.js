@@ -12,7 +12,7 @@ const StyledToolbar = styled(Toolbar)({
 
 const Navbar = () => {
   return (
-    <AppBar position='sticky'>
+    <AppBar position='sticky' sx={{ maxHeight: "70px" }}>
       <StyledToolbar>
         <Sidemenu />
         <Search />

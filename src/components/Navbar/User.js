@@ -18,7 +18,6 @@ const User = () => {
       status: false
     })
     navigate("/");
-    console.log("first");
   }
 
   if (authState.status) {
