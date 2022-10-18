@@ -39,11 +39,14 @@ function App() {
         setAuthState({
           id: response.data.user.id,
           email: response.data.user.email,
-          isAdmin: response.data.user.isAdmin,
+          isAdmin: response.data.user.isAdmin ? true : false,
           status: true
         });
       }
-    });
+    })
+    .catch((err) => {
+      return err;
+    })
   }, [])
 
   return (

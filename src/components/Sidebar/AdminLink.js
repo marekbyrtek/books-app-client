@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Home } from '@mui/icons-material';
+import { AdminPanelSettings } from '@mui/icons-material';
 
 const AdminLink = () => {
     const { authState } = useContext(AuthContext);
@@ -13,7 +13,7 @@ const AdminLink = () => {
             <ListItem disablePadding>
                 <ListItemButton onClick={() => navigate("/admin")}>
                     <ListItemIcon>
-                        <Home />
+                        <AdminPanelSettings />
                     </ListItemIcon>
                     <ListItemText primary="Admin page" />
                 </ListItemButton>

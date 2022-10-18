@@ -7,7 +7,7 @@ import Sidemenu from './Sidemenu';
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center"
+  alignItems: "center",
 })
 
 const Navbar = () => {

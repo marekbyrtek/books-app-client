@@ -36,17 +36,14 @@ const Login = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value
     }
-    console.log(data);
-    // setError("");
     setLoading(true);
     axios.post(`${serverURL}/api/users/login`, data)
       .then((resp) => {
-        console.log(resp);
         localStorage.setItem("accessToken", resp.data.token);
         setAuthState({
           id: resp.data.user.idusers,
           email: resp.data.user.email,
-          isAdmin: resp.data.user.admin,
+          isAdmin: resp.data.user.admin ? true : false,
           status: true
         });
         navigate("/");
