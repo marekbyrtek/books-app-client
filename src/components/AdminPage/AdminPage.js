@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Box, useMediaQuery, useTheme, Paper } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { DataGrid } from "@mui/x-data-grid";
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ServerContext } from '../../context/ServerContext';
 import Toolbar from './Toolbar';
@@ -26,7 +25,6 @@ const AdminPage = () => {
   const [listOfChecked, setListOfChecked] = useState([]);
   const [pageSize, setPageSize] = useState(20);
   const [counter, setCounter] = useState(0);
-  const navigate = useNavigate();
   const { serverURL } = useContext(ServerContext);
 
   useEffect(() => {

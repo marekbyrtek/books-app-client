@@ -1,13 +1,11 @@
 import React, { useContext } from 'react'
-import AuthContext from '../../context/AuthContext';
 import { ModeContext } from '../../context/ModeContext';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch } from '@mui/material';
-import { Home, DarkMode } from '@mui/icons-material';
+import { Home, DarkMode, CollectionsBookmark } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import AdminLink from './AdminLink';
 
 const Sidebar = () => {
-  const { authState } = useContext(AuthContext);
   const { mode, setMode } = useContext(ModeContext);
   const navigate = useNavigate();
 
@@ -15,7 +13,7 @@ const Sidebar = () => {
     <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block"} }}>
       <Box position="fixed">
           <List>
-            <ListItem disablePadding>
+            <ListItem>
               <ListItemButton onClick={() => navigate("/")}>
                 <ListItemIcon>
                   <Home />
@@ -23,8 +21,16 @@ const Sidebar = () => {
                 <ListItemText primary="Homepage" />
               </ListItemButton>
             </ListItem>
+            <ListItem>
+              <ListItemButton onClick={() => navigate("/collections")}>
+                <ListItemIcon>
+                  <CollectionsBookmark />
+                </ListItemIcon>
+                <ListItemText primary="All collections" />
+              </ListItemButton>
+            </ListItem>
             <AdminLink />
-            <ListItem disablePadding>
+            <ListItem>
               <ListItemButton>
                 <ListItemIcon>
                   <DarkMode />

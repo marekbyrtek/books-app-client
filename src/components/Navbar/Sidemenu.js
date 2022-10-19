@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ModeContext } from '../../context/ModeContext';
+import AuthContext from '../../context/AuthContext';
 import { Box, styled, Tooltip, IconButton, Menu, MenuItem, ListItemButton, ListItemIcon, Switch } from '@mui/material';
-import { MoreVert, Home, DarkMode } from '@mui/icons-material';
+import { MoreVert, Home, DarkMode, CollectionsBookmark, AdminPanelSettings } from '@mui/icons-material';
 
 const MenuBox = styled(Box)(({ theme }) => ({
     display: "block",
@@ -16,6 +17,7 @@ const Sidemenu = () => {
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
     const { mode, setMode } = useContext(ModeContext);
+    const { authState } = useContext(AuthContext);
   
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -82,7 +84,23 @@ const Sidemenu = () => {
                         </ListItemButton>
                     </MenuItem>
                     <MenuItem>
-                        <ListItemButton onClick={() => navigate("/register")}>
+                        <ListItemButton onClick={() => navigate("/collections")}>
+                            <ListItemIcon>
+                                <CollectionsBookmark />
+                            </ListItemIcon>
+                            All collections
+                        </ListItemButton>
+                    </MenuItem>
+                    {authState.isAdmin && (<MenuItem>
+                        <ListItemButton onClick={() => navigate("/admin")}>
+                            <ListItemIcon>
+                                <AdminPanelSettings />
+                            </ListItemIcon>
+                            Admin page
+                        </ListItemButton>
+                    </MenuItem>)}
+                    <MenuItem>
+                        <ListItemButton>
                             <ListItemIcon>
                                 <DarkMode />
                             </ListItemIcon>

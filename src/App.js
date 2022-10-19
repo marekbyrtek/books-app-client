@@ -12,10 +12,13 @@ import Home from "./components/Home/Home";
 import Login from "./components/SigningPage/Login";
 import Register from "./components/SigningPage/Register";
 import AdminPage from "./components/AdminPage/AdminPage";
+import Collections from "./components/Collections/Collections";
+import UserCollections from "./components/Collections/UserCollections";
+import Items from "./components/Items/Items";
 
 function App() {
   const [mode, setMode] = useState("light");
-  const [serverURL, setServerURL] = useState("https://books-app-server-mysql.herokuapp.com");
+  const [serverURL, setServerURL] = useState("http://localhost:3001");
   // http://localhost:3001
   // https://books-app-server-mysql.herokuapp.com
   const { authState, setAuthState } = useContext(AuthContext);
@@ -64,6 +67,9 @@ function App() {
                   <Route exact path="/login" element={<Login />} />
                   <Route exact path="/register" element={<Register />} />
                   <Route exact path="/admin" element={<AdminPage />} />
+                  <Route exact path="/collections" element={<Collections />} />
+                  <Route exact path="/collections/:user" element={<UserCollections />} />
+                  <Route exact path="/items/:collection" element={<Items />} />
                 </Routes>
               </Stack>
             </Router>

@@ -10,7 +10,7 @@ const AdminLink = () => {
 
     if (authState.isAdmin) {
         return (
-            <ListItem disablePadding>
+            <ListItem>
                 <ListItemButton onClick={() => navigate("/admin")}>
                     <ListItemIcon>
                         <AdminPanelSettings />
