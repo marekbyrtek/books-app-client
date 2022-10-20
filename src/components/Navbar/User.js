@@ -14,6 +14,7 @@ const User = () => {
     setAuthState({
       id: 0,
       email: "",
+      name: "",
       isAdmin: false,
       status: false
     })

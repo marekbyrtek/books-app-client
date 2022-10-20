@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Box, MenuItem, Menu, Button, Tooltip, IconButton, ListItemIcon, ListItemButton, styled } from '@mui/material';
 import { AccountCircle, Logout } from "@mui/icons-material";
+import AuthContext from '../../context/AuthContext';
 
 const UserBox = styled(Box)(({ theme }) => ({
     display: "none",
@@ -23,6 +24,7 @@ const LogedIn = ({ handleLogout }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
+    const { authState } = useContext(AuthContext);
   
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -34,7 +36,7 @@ const LogedIn = ({ handleLogout }) => {
     return (
         <>
             <UserBox>
-                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to="/collection">Collections</Button>
+                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to={`/collections/${authState.id}`}>Collections</Button>
                 <Button color="inherit" variant="outlined" onClick={handleLogout} sx={{ textDecoration: "none", lineHeight: "inherit" }}>Logout</Button>
             </UserBox>
             <UserIcon>
@@ -86,7 +88,7 @@ const LogedIn = ({ handleLogout }) => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
                     <MenuItem>
-                        <ListItemButton onClick={() => navigate("/collection")}>
+                        <ListItemButton onClick={() => navigate(`/collections/${authState.id}`)}>
                             <ListItemIcon>
                                 <AccountCircle />
                             </ListItemIcon>

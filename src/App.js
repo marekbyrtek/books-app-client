@@ -42,6 +42,7 @@ function App() {
         setAuthState({
           id: response.data.user.id,
           email: response.data.user.email,
+          name: response.data.user.name,
           isAdmin: response.data.user.isAdmin ? true : false,
           status: true
         });

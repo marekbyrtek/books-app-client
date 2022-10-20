@@ -8,7 +8,7 @@ import CollectionsHome from './CollectionsHome';
 const Home = () => {
   const [lastItems, setLastItems] = useState(null);
   const [biggestCollections, setBiggestCollections] = useState(null);
-  const {serverURL} = useContext(ServerContext);
+  const { serverURL } = useContext(ServerContext);
 
   useEffect(() => {
     axios.get(`${serverURL}/api/items/home`)

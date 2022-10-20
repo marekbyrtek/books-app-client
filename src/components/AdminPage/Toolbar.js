@@ -34,6 +34,7 @@ const Toolbar = ({ users, setCounter }) => {
             setAuthState({
             id: 0,
             email: "",
+            name: "",
             isAdmin: false,
             status: false
             })
@@ -88,6 +89,7 @@ const Toolbar = ({ users, setCounter }) => {
             setAuthState({
             id: 0,
             email: "",
+            name: "",
             isAdmin: false,
             status: false
             })

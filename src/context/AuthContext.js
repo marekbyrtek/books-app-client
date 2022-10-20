@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
     const [authState, setAuthState] = useState({
         id: 0,
         email: "",
+        name: "",
         isAdmin: false,
         status: false
     });
