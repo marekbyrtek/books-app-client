@@ -18,7 +18,7 @@ import Items from "./components/Items/Items";
 
 function App() {
   const [mode, setMode] = useState("light");
-  const [serverURL, setServerURL] = useState("http://localhost:3001");
+  const [serverURL, setServerURL] = useState("https://books-app-server-mysql.herokuapp.com");
   // http://localhost:3001
   // https://books-app-server-mysql.herokuapp.com
   const { authState, setAuthState } = useContext(AuthContext);
