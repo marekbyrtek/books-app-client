@@ -15,7 +15,7 @@ const UserCollections = () => {
   const navigate = useNavigate();
   
   // useEffect(() => {
-  //   (authState.id != user || authState.isAdmin === false) && navigate("/collections")
+  //   (authState.id != user && authState.isAdmin === false) && navigate("/collections")
   // },[])
 
   useEffect(() => {
