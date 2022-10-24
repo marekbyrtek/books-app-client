@@ -24,7 +24,6 @@ const Items = () => {
     axios.get(`${serverURL}/api/items/get/${collection}`)
       .then((res) =>{
         setListOfItems(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

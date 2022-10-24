@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField, Autocomplete, styled } from '@mui/material'
 
 const SearchField = styled("div")(({ theme }) => ({
-  backgroundColor: "white",
+  backgroundColor: theme.palette.background.default,
   padding: "5px",
   margin: "5px 0",
   width: "40%",

@@ -11,6 +11,7 @@ const UserCollections = () => {
   const { user } = useParams();
   const [userCollections, setUserCollections] = useState(null);
   const { serverURL } = useContext(ServerContext);
+  const [counter, setCounter] = useState(0);
   const { authState } = useContext(AuthContext);
   const navigate = useNavigate();
   
@@ -26,7 +27,7 @@ const UserCollections = () => {
       .catch((err) => {
         console.log(err);
       })
-  },[])
+  },[counter])
   
   return (
     <Box
@@ -38,7 +39,7 @@ const UserCollections = () => {
       alignItems: "center"
     }}
     >
-      <UserCollectionsComponent userCollections={userCollections} />
+      <UserCollectionsComponent setCounter={setCounter} userCollections={userCollections} user={user} />
     </Box>
   )
 }

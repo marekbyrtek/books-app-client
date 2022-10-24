@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import { Box, Skeleton, Typography, useMediaQuery, useTheme, styled, Paper, Button, Card, CardContent, CardActions } from '@mui/material';
 import Grid from "@mui/material/Unstable_Grid2";
+import AddCollection from './AddCollection';
+import { Add } from '@mui/icons-material';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -11,11 +13,14 @@ const StyledBox = styled(Box)(({ theme }) => ({
     }
 }))
 
-const UserCollectionsComponent = ({ userCollections }) => {
+const UserCollectionsComponent = ({ setCounter, userCollections, user }) => {
     const navigate = useNavigate();
     const { authState } = useContext(AuthContext);
     const theme = useTheme();
     const variant = useMediaQuery(theme.breakpoints.up("sm")) ? "h4" : "h5";
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     if (userCollections === null) {
         return (
@@ -50,6 +55,17 @@ const UserCollectionsComponent = ({ userCollections }) => {
                             </Paper>
                         </Grid>
                     ))}
+                    <Grid xs={4} md={4}>
+                        <Paper elevation ="4" sx={{ height: "100%" }}>
+                            <Card sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-around", padding: "20px 0" }}>
+                                <Typography variant={variant}>Add collection</Typography>
+                                <Button size='small' onClick={handleOpen}>
+                                    <Add sx={{ fontSize: 40 }} />
+                                </Button>
+                                <AddCollection user={user} open={open} handleClose={handleClose} setCounter={setCounter} />
+                            </Card>
+                        </Paper>
+                    </Grid>
                 </Grid>
             </StyledBox>
         )
