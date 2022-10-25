@@ -30,13 +30,18 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 
   function createData(name, tags) {
-    return { name, tags };
+    if (tags === null) {
+      return { name, tags };
+    } else {
+      tags = tags.replace(",", ", ");
+      return { name, tags }
+    }
   }
 
 const ItemsTable = ({ listOfItems }) => {
     const theme = useTheme();
     const variant = useMediaQuery(theme.breakpoints.up("sm")) ? "h5" : "h6";
-    const rows = listOfItems.map((el) => createData(el.name, el.tags.replace(",", ", ")))
+    const rows = listOfItems.map((el) => createData(el.name, el.tags));
 
     return (
         <StyledBox>
