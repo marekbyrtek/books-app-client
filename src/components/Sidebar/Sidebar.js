@@ -35,7 +35,15 @@ const Sidebar = () => {
                 <ListItemIcon>
                   <DarkMode />
                 </ListItemIcon>
-                <Switch checked={mode === "dark"} onChange={() => setMode(mode === "light" ? "dark" : "light")} />
+                <Switch checked={mode === "dark"} onChange={() => {
+                  if (mode === "light") {
+                    setMode("dark");
+                    localStorage.setItem("mode", "dark")
+                  } else {
+                    setMode("light");
+                    localStorage.setItem("mode", "light")
+                  }
+                }} />
               </ListItemButton>
             </ListItem>
           </List>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { TextField, Autocomplete, styled } from '@mui/material';
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const StyledSearchField = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -17,6 +18,7 @@ const StyledSearchField = styled("div")(({ theme }) => ({
 const SearchField = () => {
   const [searchOptions, setSearchOptions] = useState([]);
   const { serverURL } = useContext(ServerContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`${serverURL}/api/search`)
@@ -30,7 +32,7 @@ const SearchField = () => {
 
   const handleSearch = (e, newValue) => {
     e.preventDefault();
-    console.log(newValue);
+    navigate(`/search/${newValue}`);
   }
 
   return (

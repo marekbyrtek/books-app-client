@@ -15,9 +15,15 @@ import AdminPage from "./components/AdminPage/AdminPage";
 import Collections from "./components/Collections/Collections";
 import UserCollections from "./components/Collections/UserCollections";
 import Items from "./components/Items/Items";
+import Search from "./components/Search/Search";
 
 function App() {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState(((localStorage.getItem("mode") === "light") || (localStorage.getItem("mode") === "dark")) ? localStorage.getItem("mode") : "light");
+  useEffect(() => {
+    if (localStorage.getItem("mode") === null) {
+      localStorage.setItem("mode", "light");
+    }
+  },[])
   const [serverURL, setServerURL] = useState("https://books-app-server-mysql.herokuapp.com");
   // http://localhost:3001
   // https://books-app-server-mysql.herokuapp.com
@@ -71,6 +77,7 @@ function App() {
                   <Route exact path="/collections" element={<Collections />} />
                   <Route exact path="/collections/:user" element={<UserCollections />} />
                   <Route exact path="/items/:collection" element={<Items />} />
+                  <Route exact path="/search/:tag" element={<Search />} />
                 </Routes>
               </Stack>
             </Router>

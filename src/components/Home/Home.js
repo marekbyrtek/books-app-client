@@ -4,6 +4,7 @@ import { ServerContext } from '../../context/ServerContext';
 import { Box } from '@mui/material';
 import ItemsHome from './ItemsHome';
 import CollectionsHome from './CollectionsHome';
+import TagCloud from './TagCloud';
 
 const Home = () => {
   const [lastItems, setLastItems] = useState(null);
@@ -42,6 +43,7 @@ const Home = () => {
     >
       <ItemsHome lastItems={lastItems} />
       <CollectionsHome biggestCollections={biggestCollections} />
+      <TagCloud />
     </Box>
   )
 }
