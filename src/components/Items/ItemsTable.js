@@ -36,7 +36,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const ItemsTable = ({ listOfItems }) => {
     const theme = useTheme();
     const variant = useMediaQuery(theme.breakpoints.up("sm")) ? "h5" : "h6";
-    const rows = listOfItems.map((el) => createData(el.name, "tagi"))
+    const rows = listOfItems.map((el) => createData(el.name, el.tags.replace(",", ", ")))
 
     return (
         <StyledBox>
