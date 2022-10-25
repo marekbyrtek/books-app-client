@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, styled, Toolbar } from '@mui/material';
 import User from './User';
-import Search from './Search';
+import SearchField from './SearchField';
 import Sidemenu from './Sidemenu';
 
 const StyledToolbar = styled(Toolbar)({
@@ -15,7 +15,7 @@ const Navbar = () => {
     <AppBar position='sticky' sx={{ maxHeight: "70px" }}>
       <StyledToolbar>
         <Sidemenu />
-        <Search />
+        <SearchField />
         <User />
       </StyledToolbar>
     </AppBar>

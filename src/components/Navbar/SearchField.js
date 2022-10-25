@@ -1,7 +1,9 @@
-import React from 'react'
-import { TextField, Autocomplete, styled } from '@mui/material'
+import React, { useState, useEffect, useContext } from 'react';
+import { TextField, Autocomplete, styled } from '@mui/material';
+import { ServerContext } from '../../context/ServerContext';
+import axios from 'axios';
 
-const SearchField = styled("div")(({ theme }) => ({
+const StyledSearchField = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   padding: "5px",
   margin: "5px 0",
@@ -12,7 +14,19 @@ const SearchField = styled("div")(({ theme }) => ({
 }
 }));
 
-const Search = () => {
+const SearchField = () => {
+  const [searchOptions, setSearchOptions] = useState([]);
+  const { serverURL } = useContext(ServerContext);
+
+  useEffect(() => {
+    axios.get(`${serverURL}/api/search`)
+      .then((res) => {
+        setSearchOptions(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  },[])
 
   const handleSearch = (e, newValue) => {
     e.preventDefault();
@@ -20,12 +34,12 @@ const Search = () => {
   }
 
   return (
-    <SearchField>
+    <StyledSearchField>
       <Autocomplete
           freeSolo
           id="search-collection"
           disableClearable
-          options={["jeden", "dwa", "trzy"]}
+          options={searchOptions}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -40,8 +54,8 @@ const Search = () => {
           value=""
           onChange={handleSearch}
         />
-    </SearchField>
+    </StyledSearchField>
   )
 }
 
-export default Search;
+export default SearchField;
