@@ -13,7 +13,7 @@ const ModalBox = styled(Box)({
 
 const StyledFormControl = styled(FormControl)({
     margin: "15px 0"
-  })
+})
 
 const StyledFormSelect = styled(FormControl)({
     margin: "15px 0",
