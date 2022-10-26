@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
-import { Box, Skeleton, Typography, useMediaQuery, useTheme, styled, Paper, Button, Card, CardContent, CardActions } from '@mui/material';
+import { ServerContext } from '../../context/ServerContext';
+import { Box, Skeleton, Typography, useMediaQuery, useTheme, styled, Paper, Button, Card, CardContent, CardActions, IconButton } from '@mui/material';
 import Grid from "@mui/material/Unstable_Grid2";
+import Comments from './Comments';
+import axios from 'axios';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -12,10 +15,23 @@ const StyledBox = styled(Box)(({ theme }) => ({
 }))
 
 const AllCollections = ({ collections }) => {
+    const [listOfLikes, setListOfLikes] = useState([]);
+    const [counter, setCounter] = useState(0);
     const navigate = useNavigate();
     const { authState } = useContext(AuthContext);
+    const { serverURL } = useContext(ServerContext);
     const theme = useTheme();
     const variant = useMediaQuery(theme.breakpoints.up("sm")) ? "h4" : "h5";
+
+    useEffect(() => {
+        axios.get(`${serverURL}/api/likes/${authState.id}`)
+            .then((res) => {
+                const likes = res.data.map((el) => el.collection)
+                setListOfLikes(likes);
+
+            })
+            .catch((err) => console.log(err))
+    },[counter])
 
     if (collections === null) {
         return (
@@ -43,10 +59,11 @@ const AllCollections = ({ collections }) => {
                                         <Typography color="text.secondary">{el.topic}</Typography>
                                         <Typography variant="body2">{el.description}</Typography>
                                         <Typography variant="body2">{el.author}</Typography>
-                                        <CardActions sx={{ padding: "0" }}>
-                                            <Button size="small" sx={{ paddingLeft: "0" }} onClick={(() => navigate(`/items/${el.idcollection}`))}>See collection</Button>
-                                        </CardActions>
                                     </CardContent>
+                                    <CardActions  sx={{ paddingTop: "0" }}>
+                                        <Button size="small" onClick={(() => navigate(`/items/${el.idcollection}`))}>See collection</Button>
+                                    </CardActions>
+                                    <Comments collection={el.idcollection} authState={authState} listOfLikes={listOfLikes} setCounter={setCounter} />
                                 </Card>
                             </Paper>
                         </Grid>

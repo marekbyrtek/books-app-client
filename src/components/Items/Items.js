@@ -81,8 +81,7 @@ const Items = () => {
         alignItems: "center"
       }}
       >
-        {/* {(authState.id === user) && <Button onClick={handleOpen}>Add item</Button>} */}
-        <Button onClick={handleOpen}>Add item</Button>
+        {(authState.id === user) && <Button onClick={handleOpen}>Add item</Button>}
         <AddItem open={open} handleClose={handleClose} collection={collection} setCounter={setCounter} />
         <ItemsTable listOfItems={listOfItems} />
       </Box>
