@@ -20,12 +20,12 @@ const Collections = () => {
 
   return (
     <Box
-    flex={3}
-    p={2}
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
+      flex={3}
+      p={2}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
     }}
     >
       <AllCollections collections={collections} />

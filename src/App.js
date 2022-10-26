@@ -25,8 +25,6 @@ function App() {
     }
   },[])
   const [serverURL, setServerURL] = useState("https://books-app-server-mysql.herokuapp.com");
-  // http://localhost:3001
-  // https://books-app-server-mysql.herokuapp.com
   const { authState, setAuthState } = useContext(AuthContext);
 
   const darkTheme = createTheme({
@@ -67,7 +65,7 @@ function App() {
           <Box bgcolor={"background.default"} color={"text.primary"}>
             <Router>
               <Navbar />
-              <Stack direction="row" justifyContent="space-between" sx={{ height: "calc(100vh - 70px)" }}>
+              <Stack direction="row" justifyContent="space-between">
                 <Sidebar/>
                 <Routes>
                   <Route exact path="/" element={<Home />} />

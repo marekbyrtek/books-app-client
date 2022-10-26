@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, ButtonGroup, Box, useTheme, useMediaQuery } from '@mui/material';
 import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
@@ -10,12 +10,14 @@ const Toolbar = ({ users, setCounter }) => {
     const { authState, setAuthState } = useContext(AuthContext);
     const { serverURL } = useContext(ServerContext);
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const axiosPut = (route, id) => {
         axios.put(`${serverURL}${route}`, {idusers: id})
             .then((res) => console.log(res))
             .catch((err) => console.log(err))
     }
+
     const endRequest = () => {
         setTimeout(() => {
             setCounter((prev) => prev + 1);
@@ -99,15 +101,33 @@ const Toolbar = ({ users, setCounter }) => {
         }
     }
 
-    return (
-        <>
-            <Button disabled={loading} onClick={handleBlock}>block</Button>
-            <Button disabled={loading} onClick={handleUnblock}>unblock</Button>
-            <Button disabled={loading} onClick={handleRemoveAdmin}>Remove admin</Button>
-            <Button disabled={loading} onClick={handleAddAdmin}>Add admin</Button>
-            <Button disabled={loading} onClick={handleDelete}>Delete</Button>
-        </>
-    )
+    if (useMediaQuery(theme.breakpoints.up("md"))) {
+        return (
+            <Box position="fixed">
+                <ButtonGroup variant="contained" aria-label="outlined primary button group" size="small">
+                    <Button disabled={loading} onClick={handleBlock}>block</Button>
+                    <Button disabled={loading} onClick={handleUnblock}>unblock</Button>
+                    <Button disabled={loading} onClick={handleRemoveAdmin}>Remove admin</Button>
+                    <Button disabled={loading} onClick={handleAddAdmin}>Add admin</Button>
+                    <Button disabled={loading} onClick={handleDelete}>Delete</Button>
+                </ButtonGroup>
+            </Box>
+        )
+    } else {
+        return (
+            <Box position="fixed" sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group" size="small" sx={{ marginBottom: "10px" }}>
+                    <Button disabled={loading} onClick={handleBlock}>block</Button>
+                    <Button disabled={loading} onClick={handleUnblock}>unblock</Button>
+                    <Button disabled={loading} onClick={handleRemoveAdmin}>Remove admin</Button>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group" size="small">
+                    <Button disabled={loading} onClick={handleAddAdmin}>Add admin</Button>
+                    <Button disabled={loading} onClick={handleDelete}>Delete</Button>
+                </ButtonGroup>
+            </Box>
+        )
+    }
 }
 
 export default Toolbar;

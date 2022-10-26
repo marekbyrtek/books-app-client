@@ -43,9 +43,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }
 
 const ItemsTable = ({ listOfItems, setCounter, user }) => {
-    const theme = useTheme();
     const { authState } = useContext(AuthContext);
     const { serverURL } = useContext(ServerContext);
+    const theme = useTheme();
     const variant = useMediaQuery(theme.breakpoints.up("sm")) ? "h5" : "h6";
     const rows = listOfItems.map((el) => createData(el.iditems, el.name, el.tags));
 
