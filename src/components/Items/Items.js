@@ -83,7 +83,7 @@ const Items = () => {
       >
         {(authState.id === user) && <Button onClick={handleOpen}>Add item</Button>}
         <AddItem open={open} handleClose={handleClose} collection={collection} setCounter={setCounter} />
-        <ItemsTable listOfItems={listOfItems} />
+        <ItemsTable listOfItems={listOfItems} setCounter={setCounter} user={user} />
       </Box>
     )
   }

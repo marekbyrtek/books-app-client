@@ -1,6 +1,10 @@
-import React from 'react';
-import { Box, Typography, useMediaQuery, useTheme, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import React, { useContext } from 'react';
+import { Box, Typography, useMediaQuery, useTheme, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
 import { tableCellClasses } from "@mui/material/TableCell";
+import { Clear } from '@mui/icons-material';
+import AuthContext from '../../context/AuthContext';
+import { ServerContext } from '../../context/ServerContext';
+import axios from 'axios';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -29,19 +33,27 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
   }));
 
-  function createData(name, tags) {
+  function createData(id, name, tags) {
     if (tags === null) {
-      return { name, tags };
+      return { id, name, tags };
     } else {
       tags = tags.replace(",", ", ");
-      return { name, tags }
+      return { id, name, tags }
     }
   }
 
-const ItemsTable = ({ listOfItems }) => {
+const ItemsTable = ({ listOfItems, setCounter, user }) => {
     const theme = useTheme();
+    const { authState } = useContext(AuthContext);
+    const { serverURL } = useContext(ServerContext);
     const variant = useMediaQuery(theme.breakpoints.up("sm")) ? "h5" : "h6";
-    const rows = listOfItems.map((el) => createData(el.name, el.tags));
+    const rows = listOfItems.map((el) => createData(el.iditems, el.name, el.tags));
+
+    const handleDetele = (id) => {
+      axios.post(`${serverURL}/api/items/delete`, { iditems: id })
+        .then((resp) => setCounter((prev) => prev + 1))
+        .catch((err) => console.log(err))
+    }
 
     return (
         <StyledBox>
@@ -50,15 +62,23 @@ const ItemsTable = ({ listOfItems }) => {
                 <Table aria-label="last items">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>Name</StyledTableCell>
-                            <StyledTableCell>Tags</StyledTableCell>
+                          <StyledTableCell>Name</StyledTableCell>
+                          <StyledTableCell>Tags</StyledTableCell>
+                          <StyledTableCell align="right"></StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map((row) => (
-                            <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
-                            <StyledTableCell>{row.tags}</StyledTableCell>
+                            <StyledTableRow key={row.id}>
+                              <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
+                              <StyledTableCell>{row.tags}</StyledTableCell>
+                              <StyledTableCell align="right">
+                                {(authState.id === user) && (
+                                  <IconButton color="error" size='small' sx={{ padding: 0 }} onClick={() => handleDetele(row.id)}>
+                                    <Clear />
+                                  </IconButton>
+                                )}
+                              </StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
