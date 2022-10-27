@@ -14,7 +14,7 @@ const Toolbar = ({ users, setCounter }) => {
 
     const axiosPut = (route, id) => {
         axios.put(`${serverURL}${route}`, {idusers: id})
-            .then((res) => console.log(res))
+            .then((res) => res)
             .catch((err) => console.log(err))
     }
 
@@ -62,8 +62,13 @@ const Toolbar = ({ users, setCounter }) => {
             axiosPut("/api/users/admin/block", el)
         })
         if (users.includes(authState.id)) {
-            setAuthState({ ...authState, isAdmin: false })
-            navigate("/");
+            axios.post(`${serverURL}/api/users/newtoken/${authState.id}`)
+                .then((resp) => {
+                    localStorage.setItem("accessToken", resp.data.token);
+                    setAuthState({ ...authState, isAdmin: false })
+                    navigate("/");
+                })
+                .catch((err) => console.log(err))
         } else {
             endRequest();
         }

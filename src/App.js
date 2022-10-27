@@ -24,7 +24,8 @@ function App() {
       localStorage.setItem("mode", "light");
     }
   },[])
-  const [serverURL, setServerURL] = useState("https://books-app-server-mysql.herokuapp.com");
+  // const [serverURL, setServerURL] = useState("https://books-app-server-mysql.herokuapp.com");
+  const [serverURL, setServerURL] = useState("http://localhost:3001");
   const { authState, setAuthState } = useContext(AuthContext);
 
   const darkTheme = createTheme({

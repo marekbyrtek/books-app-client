@@ -56,7 +56,7 @@ const Login = () => {
 
   return (
     <StyledBox flex={3}>
-      <StyledPaper elevation={4}>
+      <StyledPaper elevation={4} sx={{ marginTop: "100px" }}>
         {error && <Alert severity="error">{error}</Alert>}
         <form onSubmit={handleSubmit} className="sign-form">
           <StyledFormControl fullWidth variant='standard'>

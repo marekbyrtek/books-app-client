@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Box, Typography, useMediaQuery, useTheme, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox } from '@mui/material';
 import { tableCellClasses } from "@mui/material/TableCell";
 
@@ -29,40 +29,53 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(number, id, email, name, admin, active) {
-    return { number, id, email, name, admin, active };
-}
-
-const AdminTable = ({ listOfUsers }) => {
+const AdminTable = ({ listOfUsers, setListOfChecked, handleChange }) => {
     const theme = useTheme();
     const variant = useMediaQuery(theme.breakpoints.up("sm")) ? "h5" : "h6";
-    const rows = listOfUsers.map((el, i) => createData(i + 1, el.id, el.email, el.name, el.admin, el.active))
+
+    useEffect(() => {
+        setListOfChecked([])
+        listOfUsers.map((el) => {
+            if (el.isChecked === true) setListOfChecked((prev) => [...prev, el.idusers]);
+        })
+    }, [listOfUsers]);
 
     return (
         <StyledBox>
-            <Typography variant={variant} sx={{ marginBottom: "10px" }}><br /></Typography>
-            <Typography variant={variant} sx={{ marginBottom: "10px" }}>Users</Typography>
+            <Typography variant={variant} sx={{ margin: "40px 0 10px" }}>Users</Typography>
             <TableContainer component={Paper}>
                 <Table aria-label="list of users">
                     <TableHead>
                         <TableRow>
-                          <StyledTableCell padding="checkbox"><Checkbox /></StyledTableCell>
-                          <StyledTableCell>#</StyledTableCell>
-                          <StyledTableCell>Name</StyledTableCell>
-                          <StyledTableCell>Email</StyledTableCell>
-                          <StyledTableCell>Status</StyledTableCell>
-                          <StyledTableCell>Admin</StyledTableCell>
+                            <StyledTableCell padding="checkbox">
+                                <Checkbox
+                                    id="allSelect"
+                                    checked={!listOfUsers.some((user) => user.isChecked !== true)}
+                                    onChange={handleChange}
+                                />
+                            </StyledTableCell>
+                            <StyledTableCell>#</StyledTableCell>
+                            <StyledTableCell>Name</StyledTableCell>
+                            <StyledTableCell>Email</StyledTableCell>
+                            <StyledTableCell>Status</StyledTableCell>
+                            <StyledTableCell>Admin</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <StyledTableRow key={row.id}>
-                                <StyledTableCell padding="checkbox"><Checkbox /></StyledTableCell>
-                                <StyledTableCell>{row.number}</StyledTableCell>
-                                <StyledTableCell>{row.name}</StyledTableCell>
-                                <StyledTableCell>{row.email}</StyledTableCell>
-                                <StyledTableCell>{row.active}</StyledTableCell>
-                                <StyledTableCell>{row.admin}</StyledTableCell>
+                        {listOfUsers.map((el, i) => (
+                            <StyledTableRow key={el.idusers}>
+                                <StyledTableCell padding="checkbox">
+                                    <Checkbox
+                                        id={el.idusers}
+                                        checked={el.isChecked || false}
+                                        onChange={handleChange}
+                                    />
+                                </StyledTableCell>
+                                <StyledTableCell>{i + 1}</StyledTableCell>
+                                <StyledTableCell>{el.name}</StyledTableCell>
+                                <StyledTableCell>{el.email}</StyledTableCell>
+                                <StyledTableCell>{el.active ? "active" : "blocked"}</StyledTableCell>
+                                <StyledTableCell>{el.admin ? "jest" : "nie ma"}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

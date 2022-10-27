@@ -20,17 +20,36 @@ const AdminPage = () => {
   const [counter, setCounter] = useState(0);
   const { serverURL } = useContext(ServerContext);
   const theme = useTheme();
-  const Table = useMediaQuery(theme.breakpoints.up("md")) ? <AdminTable listOfUsers={listOfUsers} /> : <AdminTableSmall listOfUsers={listOfUsers} />
-
+  
   useEffect(() => {
     axios.get(`${serverURL}/api/users`)
-      .then((res) => {
-        setListOfUsers(res.data);
-      })
-      .catch((err) => {
-        return err;
-      })
+    .then((res) => {
+      setListOfUsers(res.data);
+    })
+    .catch((err) => {
+      return err;
+    })
   },[counter])
+  
+  const handleChange = (e) => {
+    const { id, checked } = e.target;
+    setListOfChecked([]);
+    if (id === "allSelect") {
+      let tempUser = listOfUsers.map((el) => {
+        return { ...el, isChecked: checked };
+      });
+      setListOfUsers(tempUser);
+    } else {
+      let tempUser = listOfUsers.map((el) => {
+        return el.idusers === +id ? { ...el, isChecked: checked } : el
+      });
+      setListOfUsers(tempUser);
+    }
+  }
+  
+  const Table = useMediaQuery(theme.breakpoints.up("md")) ?
+  <AdminTable listOfUsers={listOfUsers} setListOfChecked={setListOfChecked} handleChange={handleChange} /> :
+  <AdminTableSmall listOfUsers={listOfUsers} setListOfChecked={setListOfChecked} handleChange={handleChange} />
 
   if (listOfUsers === null) {
     return (
