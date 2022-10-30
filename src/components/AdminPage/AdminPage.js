@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Box, Skeleton, styled, Typography, useMediaQuery, useTheme } from '@mui/material';
 import axios from 'axios';
 import { ServerContext } from '../../context/ServerContext';
+import { FormattedMessage } from 'react-intl';
 import Toolbar from './Toolbar';
 import AdminTable from './AdminTable';
 import AdminTableSmall from './AdminTableSmall';
@@ -63,7 +64,7 @@ const AdminPage = () => {
       }}
       >
         <StyledBox>
-          <Typography variant="h5" sx={{ marginBottom: "10px" }}>Users</Typography>
+          <Typography variant="h5" sx={{ marginBottom: "10px" }}><FormattedMessage id="admin-page.header" /></Typography>
             <Typography variant='h3'>
               <Skeleton variant="rounded" sx={{ marginBottom: "10px" }} />
               <Skeleton variant="rounded" sx={{ marginBottom: "10px" }} />

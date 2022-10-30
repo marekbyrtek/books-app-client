@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { ModeContext } from '../../context/ModeContext';
 import AuthContext from '../../context/AuthContext';
 import { Box, styled, Tooltip, IconButton, Menu, MenuItem, ListItemButton, ListItemIcon, Switch } from '@mui/material';
-import { MoreVert, Home, DarkMode, CollectionsBookmark, AdminPanelSettings } from '@mui/icons-material';
+import { MoreVert, Home, DarkMode, CollectionsBookmark, AdminPanelSettings, Translate } from '@mui/icons-material';
+import { FormattedMessage } from 'react-intl';
+import LanguageContext from '../../context/LanguageContext';
+import locales from '../../config/locales';
 
 const MenuBox = styled(Box)(({ theme }) => ({
     display: "block",
@@ -18,6 +21,7 @@ const Sidemenu = () => {
     const navigate = useNavigate();
     const { mode, setMode } = useContext(ModeContext);
     const { authState } = useContext(AuthContext);
+    const { locale, setLocalization } = useContext(LanguageContext);
   
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -80,7 +84,7 @@ const Sidemenu = () => {
                             <ListItemIcon>
                                 <Home />
                             </ListItemIcon>
-                            Homepage
+                            <FormattedMessage id="navbar.menu1" />
                         </ListItemButton>
                     </MenuItem>
                     <MenuItem>
@@ -88,7 +92,7 @@ const Sidemenu = () => {
                             <ListItemIcon>
                                 <CollectionsBookmark />
                             </ListItemIcon>
-                            All collections
+                            <FormattedMessage id="navbar.menu2" />
                         </ListItemButton>
                     </MenuItem>
                     {authState.isAdmin && (<MenuItem>
@@ -96,9 +100,25 @@ const Sidemenu = () => {
                             <ListItemIcon>
                                 <AdminPanelSettings />
                             </ListItemIcon>
-                            Admin page
+                            <FormattedMessage id="navbar.menu3" />
                         </ListItemButton>
                     </MenuItem>)}
+                    <MenuItem>
+                        <ListItemButton disabled={locale === locales.EN} onClick={() => setLocalization(locales.EN)}>
+                            <ListItemIcon>
+                                <Translate />
+                            </ListItemIcon>
+                            English
+                        </ListItemButton>
+                    </MenuItem>
+                    <MenuItem>
+                        <ListItemButton disabled={locale === locales.PL} onClick={() => setLocalization(locales.PL)}>
+                            <ListItemIcon>
+                                <Translate />
+                            </ListItemIcon>
+                            Polski
+                        </ListItemButton>
+                    </MenuItem>
                     <MenuItem>
                         <ListItemButton>
                             <ListItemIcon>

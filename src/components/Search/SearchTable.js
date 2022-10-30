@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { tableCellClasses } from "@mui/material/TableCell";
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -33,9 +34,9 @@ const SearchTable = ({ rows, variant, tag }) => {
                 <Table aria-label="search results">
                     <TableHead>
                     <TableRow>
-                        <StyledTableCell>Name</StyledTableCell>
-                        <StyledTableCell>Collection</StyledTableCell>
-                        <StyledTableCell>Author</StyledTableCell>
+                        <StyledTableCell><FormattedMessage id="home-items.table1" /></StyledTableCell>
+                        <StyledTableCell><FormattedMessage id="home-items.table2" /></StyledTableCell>
+                        <StyledTableCell><FormattedMessage id="home-items.table3" /></StyledTableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>

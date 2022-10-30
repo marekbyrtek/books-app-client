@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Box, useTheme, useMediaQuery } from '@mui/material
 import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
 
 const Toolbar = ({ users, setCounter }) => {
     const [loading, setLoading] = useState(false);
@@ -110,11 +111,11 @@ const Toolbar = ({ users, setCounter }) => {
         return (
             <Box position="fixed">
                 <ButtonGroup variant="contained" aria-label="outlined primary button group" size="small">
-                    <Button disabled={loading} onClick={handleBlock}>block</Button>
-                    <Button disabled={loading} onClick={handleUnblock}>unblock</Button>
-                    <Button disabled={loading} onClick={handleRemoveAdmin}>Remove admin</Button>
-                    <Button disabled={loading} onClick={handleAddAdmin}>Add admin</Button>
-                    <Button disabled={loading} onClick={handleDelete}>Delete</Button>
+                    <Button disabled={loading} onClick={handleBlock}><FormattedMessage id="admin-toolbar.button1" /></Button>
+                    <Button disabled={loading} onClick={handleUnblock}><FormattedMessage id="admin-toolbar.button2" /></Button>
+                    <Button disabled={loading} onClick={handleRemoveAdmin}><FormattedMessage id="admin-toolbar.button3" /></Button>
+                    <Button disabled={loading} onClick={handleAddAdmin}><FormattedMessage id="admin-toolbar.button4" /></Button>
+                    <Button disabled={loading} onClick={handleDelete}><FormattedMessage id="admin-toolbar.button5" /></Button>
                 </ButtonGroup>
             </Box>
         )
@@ -122,13 +123,13 @@ const Toolbar = ({ users, setCounter }) => {
         return (
             <Box position="fixed" sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group" size="small" sx={{ marginBottom: "10px" }}>
-                    <Button disabled={loading} onClick={handleBlock}>block</Button>
-                    <Button disabled={loading} onClick={handleUnblock}>unblock</Button>
-                    <Button disabled={loading} onClick={handleRemoveAdmin}>Remove admin</Button>
+                    <Button disabled={loading} onClick={handleBlock}><FormattedMessage id="admin-toolbar.button1" /></Button>
+                    <Button disabled={loading} onClick={handleUnblock}><FormattedMessage id="admin-toolbar.button2" /></Button>
+                    <Button disabled={loading} onClick={handleRemoveAdmin}><FormattedMessage id="admin-toolbar.button3" /></Button>
                 </ButtonGroup>
                 <ButtonGroup variant="contained" aria-label="outlined primary button group" size="small">
-                    <Button disabled={loading} onClick={handleAddAdmin}>Add admin</Button>
-                    <Button disabled={loading} onClick={handleDelete}>Delete</Button>
+                    <Button disabled={loading} onClick={handleAddAdmin}><FormattedMessage id="admin-toolbar.button4" /></Button>
+                    <Button disabled={loading} onClick={handleDelete}><FormattedMessage id="admin-toolbar.button5" /></Button>
                 </ButtonGroup>
             </Box>
         )

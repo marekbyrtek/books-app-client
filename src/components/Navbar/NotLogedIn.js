@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Box, MenuItem, Menu, Button, Tooltip, IconButton, ListItemIcon, ListItemButton, styled } from '@mui/material';
 import { AccountCircle, Login, PersonAddAlt } from "@mui/icons-material";
+import { FormattedMessage } from 'react-intl';
 
 const UserBox = styled(Box)(({ theme }) => ({
     display: "none",
@@ -34,8 +35,8 @@ const NotLogedIn = () => {
     return (
         <>
             <UserBox>
-                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to="/login">Sign In</Button>
-                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to="/register">Register</Button>
+                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to="/login"><FormattedMessage id="navbar.button3" /></Button>
+                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to="/register"><FormattedMessage id="navbar.button4" /></Button>
             </UserBox>
             <UserIcon>
                 <Tooltip title="Account">
@@ -90,7 +91,7 @@ const NotLogedIn = () => {
                             <ListItemIcon>
                                 <Login />
                             </ListItemIcon>
-                            Sign In
+                            <FormattedMessage id="navbar.button3" />
                         </ListItemButton>
                     </MenuItem>
                     <MenuItem>
@@ -98,7 +99,7 @@ const NotLogedIn = () => {
                             <ListItemIcon>
                                 <PersonAddAlt />
                             </ListItemIcon>
-                            Register
+                            <FormattedMessage id="navbar.button4" />
                         </ListItemButton>
                     </MenuItem>
                 </Menu>

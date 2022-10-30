@@ -2,7 +2,7 @@ import React, {useState, useRef, useContext } from 'react';
 import { Modal, Box, Paper, Button, styled, useTheme, FormControl, Alert, TextField } from "@mui/material";
 import axios from 'axios';
 import { ServerContext } from '../../context/ServerContext';
-import { palette } from '@mui/system';
+import { FormattedMessage } from 'react-intl';
 
 const ModalBox = styled(Box)({
     position: 'absolute',
@@ -62,7 +62,7 @@ const AddItem = ({ open, handleClose, collection, setCounter }) => {
                     {error && <Alert severity="error">{error}</Alert>}
                     <form onSubmit={handleSubmit} className="sign-form">
                         <StyledFormControl fullWidth variant='standard'>
-                            <TextField id='name' label="name" variant="standard" required inputRef={nameRef} />
+                            <TextField id='name' label={<FormattedMessage id="home-items.table1" />} variant="standard" required inputRef={nameRef} />
                         </StyledFormControl>
                         <StyledFormControl fullWidth variant='standard'>
                             <TextField id='tag1' label="tag" variant="standard" required inputRef={tag1Ref} />
@@ -73,7 +73,7 @@ const AddItem = ({ open, handleClose, collection, setCounter }) => {
                         <StyledFormControl fullWidth variant='standard'>
                             <TextField id='tag3' label="tag" variant="standard" inputRef={tag3Ref} />
                         </StyledFormControl>
-                        <Button fullWidth type='submit' variant='contained' disabled={loading} sx={{ marginTop: "15px" }}>Add Item</Button>
+                        <Button fullWidth type='submit' variant='contained' disabled={loading} sx={{ marginTop: "15px" }}><FormattedMessage id="items.button" /></Button>
                     </form>
                 </Paper>
             </ModalBox>

@@ -3,6 +3,7 @@ import { Box, Skeleton, Typography, useMediaQuery, useTheme, styled, Paper, Butt
 import Grid from "@mui/material/Unstable_Grid2";
 import { ArrowForward } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -20,7 +21,7 @@ const CollectionsHome = ({ biggestCollections }) => {
         return (
             <StyledBox>
                 <Typography variant={variant}>
-                    Biggest collections
+                    <FormattedMessage id="home-collections.header" />
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }}/>
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }}/>
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }}/>
@@ -32,7 +33,7 @@ const CollectionsHome = ({ biggestCollections }) => {
     } else {
         return (
             <StyledBox>
-                <Typography variant={variant} sx={{ marginBottom: "10px" }}>Biggest collections:</Typography>
+                <Typography variant={variant} sx={{ marginBottom: "10px" }}><FormattedMessage id="home-collections.header" /></Typography>
                 <Grid container spacing={{ xs: 2, sm: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {biggestCollections.map((el) => (
                         <Grid xs={2} sm={4} md={4} key={el.idcollection}>
@@ -43,7 +44,7 @@ const CollectionsHome = ({ biggestCollections }) => {
                                         <Typography color="text.secondary">{el.author}</Typography>
                                         <Typography variant="body2">{el.topic}</Typography>
                                         <CardActions sx={{ padding: "0" }}>
-                                            <Button size="small" sx={{ paddingLeft: "0" }} onClick={(() => navigate(`/items/${el.idcollection}`))}>See collection</Button>
+                                            <Button size="small" sx={{ paddingLeft: "0" }} onClick={(() => navigate(`/items/${el.idcollection}`))}><FormattedMessage id="collection-all.card" /></Button>
                                         </CardActions>
                                     </CardContent>
                                 </Card>
@@ -53,7 +54,7 @@ const CollectionsHome = ({ biggestCollections }) => {
                     <Grid xs={2} sm={4} md={4}>
                         <Paper elevation ="4" sx={{ height: "100%" }}>
                             <Card sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-around", padding: "20px 0" }}>
-                                <Typography variant={variant}>See all</Typography>
+                                <Typography variant={variant}><FormattedMessage id="home-collections.card" /></Typography>
                                 <Button size='small' onClick={(() => navigate("/collections"))}>
                                     <ArrowForward sx={{ fontSize: 40 }} />
                                 </Button>

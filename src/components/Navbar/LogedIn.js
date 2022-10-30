@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Box, MenuItem, Menu, Button, Tooltip, IconButton, ListItemIcon, ListItemButton, styled } from '@mui/material';
 import { AccountCircle, Logout } from "@mui/icons-material";
 import AuthContext from '../../context/AuthContext';
+import { FormattedMessage } from 'react-intl';
 
 const UserBox = styled(Box)(({ theme }) => ({
     display: "none",
@@ -36,8 +37,8 @@ const LogedIn = ({ handleLogout }) => {
     return (
         <>
             <UserBox>
-                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to={`/collections/${authState.id}`}>Collections</Button>
-                <Button color="inherit" variant="outlined" onClick={handleLogout} sx={{ textDecoration: "none", lineHeight: "inherit" }}>Logout</Button>
+                <Button color="inherit" variant="outlined" as={Link} sx={{ textDecoration: "none", lineHeight: "inherit" }} to={`/collections/${authState.id}`}><FormattedMessage id="navbar.button1" /></Button>
+                <Button color="inherit" variant="outlined" onClick={handleLogout} sx={{ textDecoration: "none", lineHeight: "inherit" }}><FormattedMessage id="navbar.button2" /></Button>
             </UserBox>
             <UserIcon>
                 <Tooltip title="Account">
@@ -92,7 +93,7 @@ const LogedIn = ({ handleLogout }) => {
                             <ListItemIcon>
                                 <AccountCircle />
                             </ListItemIcon>
-                            Collections
+                            <FormattedMessage id="navbar.button1" />
                         </ListItemButton>
                     </MenuItem>
                     <MenuItem>
@@ -100,7 +101,7 @@ const LogedIn = ({ handleLogout }) => {
                             <ListItemIcon>
                                 <Logout />
                             </ListItemIcon>
-                            Logout
+                            <FormattedMessage id="navbar.button2" />
                         </ListItemButton>
                     </MenuItem>
                 </Menu>

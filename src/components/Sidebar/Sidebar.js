@@ -1,12 +1,16 @@
 import React, { useContext } from 'react'
 import { ModeContext } from '../../context/ModeContext';
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Switch } from '@mui/material';
-import { Home, DarkMode, CollectionsBookmark } from '@mui/icons-material';
+import { Home, DarkMode, CollectionsBookmark, Translate } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import AdminLink from './AdminLink';
+import { FormattedMessage } from 'react-intl';
+import LanguageContext from "../../context/LanguageContext";
+import locales from '../../config/locales';
 
 const Sidebar = () => {
   const { mode, setMode } = useContext(ModeContext);
+  const { locale, setLocalization } = useContext(LanguageContext);
   const navigate = useNavigate();
 
   return (
@@ -18,7 +22,7 @@ const Sidebar = () => {
                 <ListItemIcon>
                   <Home />
                 </ListItemIcon>
-                <ListItemText primary="Homepage" />
+                <ListItemText primary={<FormattedMessage id="navbar.menu1" />} />
               </ListItemButton>
             </ListItem>
             <ListItem>
@@ -26,10 +30,26 @@ const Sidebar = () => {
                 <ListItemIcon>
                   <CollectionsBookmark />
                 </ListItemIcon>
-                <ListItemText primary="All collections" />
+                <ListItemText primary={<FormattedMessage id="navbar.menu2" />} />
               </ListItemButton>
             </ListItem>
             <AdminLink />
+            <ListItem>
+              <ListItemButton disabled={locale === locales.EN} onClick={() => setLocalization(locales.EN)}>
+                <ListItemIcon>
+                  <Translate />
+                </ListItemIcon>
+                <ListItemText primary="English" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton disabled={locale === locales.PL} onClick={() => setLocalization(locales.PL)}>
+                <ListItemIcon>
+                  <Translate />
+                </ListItemIcon>
+                <ListItemText primary="Polski" />
+              </ListItemButton>
+            </ListItem>
             <ListItem>
               <ListItemButton>
                 <ListItemIcon>

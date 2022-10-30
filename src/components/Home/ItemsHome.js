@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Skeleton, Typography, useMediaQuery, useTheme, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { tableCellClasses } from "@mui/material/TableCell";
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -41,7 +42,7 @@ const ItemsHome = ({ lastItems }) => {
         return(
             <StyledBox>
                 <Typography variant={variant}>
-                    Last items:
+                    <FormattedMessage id="home-items.header" />
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }}/>
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }}/>
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }}/>
@@ -55,14 +56,14 @@ const ItemsHome = ({ lastItems }) => {
 
         return (
             <StyledBox>
-                <Typography variant={variant} sx={{ marginBottom: "10px" }}>Last items:</Typography>
+                <Typography variant={variant} sx={{ marginBottom: "10px" }}><FormattedMessage id="home-items.header" /></Typography>
                 <TableContainer component={Paper}>
                     <Table aria-label="last items">
                         <TableHead>
                         <TableRow>
-                            <StyledTableCell>Name</StyledTableCell>
-                            <StyledTableCell>Collection</StyledTableCell>
-                            <StyledTableCell>Author</StyledTableCell>
+                            <StyledTableCell><FormattedMessage id="home-items.table1" /></StyledTableCell>
+                            <StyledTableCell><FormattedMessage id="home-items.table2" /></StyledTableCell>
+                            <StyledTableCell><FormattedMessage id="home-items.table3" /></StyledTableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>

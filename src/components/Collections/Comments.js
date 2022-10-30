@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { CardContent, Collapse, Typography, styled, IconButton, CardActions, Skeleton, List, ListItem, ListItemText, Divider, Button } from '@mui/material';
 import { FavoriteBorder, Favorite, Comment } from "@mui/icons-material";
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
 import CommentsAdd from './CommentsAdd';
+import { FormattedMessage } from 'react-intl';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -105,7 +106,7 @@ const Comments = ({ collection, authState, listOfLikes, setCounter }) => {
                                     )
                                 })}
                             </List>
-                            {authState.status && <Button onClick={handleOpen}>Add comment</Button>}
+                            {authState.status && <Button onClick={handleOpen}><FormattedMessage id="collection-comments" /></Button>}
                             <CommentsAdd open={open} handleClose={handleClose} collection={collection} fetchComments={fetchComments} />
                         </>
                     )}

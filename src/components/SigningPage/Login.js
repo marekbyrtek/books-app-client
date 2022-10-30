@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -64,10 +65,10 @@ const Login = () => {
             <Input id='email' type='email' required inputRef={emailRef} />
           </StyledFormControl>
           <StyledFormControl fullWidth variant='standard'>
-            <InputLabel htmlFor='password'>password</InputLabel>
+            <InputLabel htmlFor='password'><FormattedMessage id="signing-page.login1" /></InputLabel>
             <Input id='password' type='password' required inputRef={passwordRef} />
           </StyledFormControl>
-          <Button fullWidth type='submit' variant="contained" disabled={loading} sx={{ marginTop: "15px" }}>Login</Button>
+          <Button fullWidth type='submit' variant="contained" disabled={loading} sx={{ marginTop: "15px" }}><FormattedMessage id="signing-page.login2" /></Button>
         </form>
       </StyledPaper>
     </StyledBox>

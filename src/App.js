@@ -3,8 +3,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthContext from "./context/AuthContext";
+import LanguageContext from "./context/LanguageContext";
 import { ModeContext } from "./context/ModeContext";
 import { ServerContext } from "./context/ServerContext";
+import { IntlProvider } from "react-intl";
 import axios from "axios";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -16,9 +18,25 @@ import Collections from "./components/Collections/Collections";
 import UserCollections from "./components/Collections/UserCollections";
 import Items from "./components/Items/Items";
 import Search from "./components/Search/Search";
+import enMessages from "./languages/en.json";
+import plMessages from "./languages/pl.json";
+import locales from "./config/locales";
+import localStorageKeys from "./config/localStorageKeys";
+
+const messages = {
+  [locales.EN]: enMessages,
+  [locales.PL]: plMessages
+}
 
 function App() {
   const [mode, setMode] = useState(((localStorage.getItem("mode") === "light") || (localStorage.getItem("mode") === "dark")) ? localStorage.getItem("mode") : "light");
+  const [locale, setLocale] = useState(localStorage.getItem(localStorageKeys.LOCALIZATION) || locales.EN);
+
+  const setLocalization = (value) => {
+    setLocale(value);
+    localStorage.setItem(localStorageKeys.LOCALIZATION, value);
+  }
+
   useEffect(() => {
     if (localStorage.getItem("mode") === null) {
       localStorage.setItem("mode", "light");
@@ -58,31 +76,35 @@ function App() {
   }, [])
 
   return (
-    <ModeContext.Provider value={{ mode, setMode }}>
-      <ServerContext.Provider value={{ serverURL, setServerURL }}>
-        <ThemeProvider theme={darkTheme}>
-          <CssBaseline />
-          <Box bgcolor={"background.default"} color={"text.primary"}>
-            <Router>
-              <Navbar />
-              <Stack direction="row" justifyContent="space-between">
-                <Sidebar/>
-                <Routes>
-                  <Route exact path="/" element={<Home />} />
-                  <Route exact path="/login" element={<Login />} />
-                  <Route exact path="/register" element={<Register />} />
-                  <Route exact path="/admin" element={<AdminPage />} />
-                  <Route exact path="/collections" element={<Collections />} />
-                  <Route exact path="/collections/:user" element={<UserCollections />} />
-                  <Route exact path="/items/:collection" element={<Items />} />
-                  <Route exact path="/search/:tag" element={<Search />} />
-                </Routes>
-              </Stack>
-            </Router>
-          </Box>
-        </ThemeProvider>
-      </ServerContext.Provider>
-    </ModeContext.Provider>
+    <LanguageContext.Provider value={{ locale, setLocalization }}>
+      <ModeContext.Provider value={{ mode, setMode }}>
+        <ServerContext.Provider value={{ serverURL, setServerURL }}>
+          <ThemeProvider theme={darkTheme}>
+            <IntlProvider locale={locale} messages={messages[locale]}>
+              <CssBaseline />
+              <Box bgcolor={"background.default"} color={"text.primary"}>
+                <Router>
+                  <Navbar />
+                  <Stack direction="row" justifyContent="space-between">
+                    <Sidebar/>
+                    <Routes>
+                      <Route exact path="/" element={<Home />} />
+                      <Route exact path="/login" element={<Login />} />
+                      <Route exact path="/register" element={<Register />} />
+                      <Route exact path="/admin" element={<AdminPage />} />
+                      <Route exact path="/collections" element={<Collections />} />
+                      <Route exact path="/collections/:user" element={<UserCollections />} />
+                      <Route exact path="/items/:collection" element={<Items />} />
+                      <Route exact path="/search/:tag" element={<Search />} />
+                    </Routes>
+                  </Stack>
+                </Router>
+              </Box>
+            </IntlProvider>
+          </ThemeProvider>
+        </ServerContext.Provider>
+      </ModeContext.Provider>
+    </LanguageContext.Provider>
   );
 }
 

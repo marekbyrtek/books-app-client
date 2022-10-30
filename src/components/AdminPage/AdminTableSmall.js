@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { Box, Typography, useMediaQuery, useTheme, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Checkbox } from '@mui/material';
 import { tableCellClasses } from "@mui/material/TableCell";
+import { Block, CheckCircleOutline } from '@mui/icons-material';
+import { red, green } from '@mui/material/colors';
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -42,7 +45,7 @@ const AdminTableSmall = ({ listOfUsers, setListOfChecked, handleChange }) => {
 
     return (
         <StyledBox>
-            <Typography variant={variant} sx={{ margin: "80px 0 10px" }}>Users</Typography>
+            <Typography variant={variant} sx={{ margin: "80px 0 10px" }}><FormattedMessage id="admin-page.header" /></Typography>
             <TableContainer component={Paper}>
                 <Table aria-label="list of users">
                     <TableHead>
@@ -70,8 +73,8 @@ const AdminTableSmall = ({ listOfUsers, setListOfChecked, handleChange }) => {
                                     />
                                 </StyledTableCell>
                                 <StyledTableCell>{el.email}</StyledTableCell>
-                                <StyledTableCell>{el.active ? "active" : "blocked"}</StyledTableCell>
-                                <StyledTableCell>{el.admin ? "jest" : "nie ma"}</StyledTableCell>
+                                <StyledTableCell>{el.active ? <CheckCircleOutline htmlColor={green[500]} /> : <Block htmlColor={red[500]} />}</StyledTableCell>
+                                <StyledTableCell>{el.admin ? <CheckCircleOutline htmlColor={green[500]} /> : <Block htmlColor={red[500]} />}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>

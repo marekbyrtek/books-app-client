@@ -5,6 +5,7 @@ import { Clear } from '@mui/icons-material';
 import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -57,13 +58,13 @@ const ItemsTable = ({ listOfItems, setCounter, user }) => {
 
     return (
         <StyledBox>
-            <Typography variant={variant} sx={{ marginBottom: "10px" }}>Last items:</Typography>
+            <Typography variant={variant} sx={{ marginBottom: "10px" }}><FormattedMessage id="items.header" /></Typography>
             <TableContainer component={Paper}>
-                <Table aria-label="last items">
+                <Table aria-label="items">
                     <TableHead>
                         <TableRow>
-                          <StyledTableCell>Name</StyledTableCell>
-                          <StyledTableCell>Tags</StyledTableCell>
+                          <StyledTableCell><FormattedMessage id="home-items.table1" /></StyledTableCell>
+                          <StyledTableCell><FormattedMessage id="items.table" /></StyledTableCell>
                           <StyledTableCell align="right"></StyledTableCell>
                         </TableRow>
                     </TableHead>

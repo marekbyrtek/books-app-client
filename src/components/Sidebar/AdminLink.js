@@ -3,6 +3,7 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { AdminPanelSettings } from '@mui/icons-material';
+import { FormattedMessage } from 'react-intl';
 
 const AdminLink = () => {
     const { authState } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const AdminLink = () => {
                     <ListItemIcon>
                         <AdminPanelSettings />
                     </ListItemIcon>
-                    <ListItemText primary="Admin page" />
+                    <ListItemText primary={<FormattedMessage id="navbar.menu3" />} />
                 </ListItemButton>
             </ListItem>
         )

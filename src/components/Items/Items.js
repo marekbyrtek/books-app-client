@@ -6,6 +6,7 @@ import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
 import ItemsTable from './ItemsTable';
 import AddItem from './AddItem';
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)(({ theme }) => ({
   width: "90%",
@@ -60,7 +61,7 @@ const Items = () => {
       }}
       >
         <StyledBox>
-          <Typography variant={variant} sx={{ marginBottom: "10px" }}>Items</Typography>
+          <Typography variant={variant} sx={{ marginBottom: "10px" }}><FormattedMessage id="items.header" /></Typography>
             <Typography variant='h3'>
               <Skeleton variant="rounded" sx={{ marginBottom: "10px" }} />
               <Skeleton variant="rounded" sx={{ marginBottom: "10px" }} />
@@ -81,7 +82,7 @@ const Items = () => {
         alignItems: "center"
       }}
       >
-        {(authState.id === user) && <Button onClick={handleOpen}>Add item</Button>}
+        {(authState.id === user) && <Button onClick={handleOpen}><FormattedMessage id="items.button" /></Button>}
         <AddItem open={open} handleClose={handleClose} collection={collection} setCounter={setCounter} />
         <ItemsTable listOfItems={listOfItems} setCounter={setCounter} user={user} />
       </Box>

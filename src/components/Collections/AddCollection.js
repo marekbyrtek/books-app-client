@@ -2,6 +2,8 @@ import React, { useState, useRef, useContext } from 'react';
 import { Modal, Box, Paper, Button, styled, useTheme, FormControl, Alert, TextField, InputLabel, MenuItem, Select } from '@mui/material';
 import axios from 'axios';
 import { ServerContext } from '../../context/ServerContext';
+import LanguageContext from "../../context/LanguageContext";
+import { FormattedMessage } from 'react-intl';
 
 const ModalBox = styled(Box)({
     position: 'absolute',
@@ -28,6 +30,7 @@ const AddCollection = ({ user, open, handleClose, setCounter }) => {
     const nameRef = useRef();
     const descriptionRef = useRef();
     const { serverURL } = useContext(ServerContext);
+    const { locale } = useContext(LanguageContext);
 
     const handleChange = (e) => {
         setTopic(e.target.value);
@@ -51,8 +54,8 @@ const AddCollection = ({ user, open, handleClose, setCounter }) => {
             })
             .catch((err) => {
                 setError(err.response.data.message);
-                setLoading(false);
             })
+        setLoading(false);
     }
 
     return (
@@ -67,13 +70,13 @@ const AddCollection = ({ user, open, handleClose, setCounter }) => {
                     {error && <Alert severity="error">{error}</Alert>}
                         <form onSubmit={handleSubmit} className="sign-form">
                             <StyledFormControl fullWidth variant='standard'>
-                                <TextField id='name' label="name" variant="standard" required inputRef={nameRef} />
+                                <TextField id='name' label={<FormattedMessage id="collection-add.label1" />} variant="standard" required inputRef={nameRef} />
                             </StyledFormControl>
                             <StyledFormControl fullWidth variant='standard'>
-                                <TextField id='description' label="description" variant='standard' multiline rows={4} required inputRef={descriptionRef} />
+                                <TextField id='description' label={<FormattedMessage id="collection-add.label2" />} variant='standard' multiline rows={4} required inputRef={descriptionRef} />
                             </StyledFormControl>
                             <StyledFormSelect>
-                                <InputLabel id="topic-select-label">Topic</InputLabel>
+                                <InputLabel id="topic-select-label"><FormattedMessage id="collection-add.input1" /></InputLabel>
                                 <Select
                                     labelId="topic-select-label"
                                     id="topic-select"
@@ -82,14 +85,14 @@ const AddCollection = ({ user, open, handleClose, setCounter }) => {
                                     label="Topic"
                                     required
                                 >
-                                    <MenuItem value="Books">Books</MenuItem>
-                                    <MenuItem value="Alcohol">Alcohol</MenuItem>
-                                    <MenuItem value="Postcards">Postcards</MenuItem>
-                                    <MenuItem value="Souvenirs">Souvenirs</MenuItem>
-                                    <MenuItem value="Other">Other</MenuItem>
+                                    <MenuItem value={(locale === "pl") ? "Książki" : "Books"}><FormattedMessage id="collection-add.input2" /></MenuItem>
+                                    <MenuItem value={(locale === "pl") ? "Alkohole" : "Alkohol"}><FormattedMessage id="collection-add.input3" /></MenuItem>
+                                    <MenuItem value={(locale === "pl") ? "Znaczki pocztowe" : "Postcards"}><FormattedMessage id="collection-add.input4" /></MenuItem>
+                                    <MenuItem value={(locale === "pl") ? "Pamiątki" : "Souvenirs"}><FormattedMessage id="collection-add.input5" /></MenuItem>
+                                    <MenuItem value={(locale === "pl") ? "Inne" : "Other"}><FormattedMessage id="collection-add.input6" /></MenuItem>
                                 </Select>
                             </StyledFormSelect>
-                            <Button fullWidth type='submit' variant="contained" disabled={loading} sx={{ marginTop: "15px" }}>Create</Button>
+                            <Button fullWidth type='submit' variant="contained" disabled={loading} sx={{ marginTop: "15px" }}><FormattedMessage id="collection-add.button" /></Button>
                         </form>
                 </Paper>
             </ModalBox>

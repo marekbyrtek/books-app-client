@@ -3,6 +3,7 @@ import { TextField, Autocomplete, styled } from '@mui/material';
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const StyledSearchField = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -45,7 +46,7 @@ const SearchField = () => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Search"
+              label={<FormattedMessage id="navbar.search-field" />}
               InputProps={{
                 ...params.InputProps,
                 type: 'search',

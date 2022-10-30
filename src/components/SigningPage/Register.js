@@ -3,6 +3,7 @@ import { FormControl, InputLabel, Input, Button, styled, Box, Paper, Alert } fro
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ServerContext } from '../../context/ServerContext';
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -57,7 +58,7 @@ const Register = () => {
         {error && <Alert severity="error">{error}</Alert>}
         <form onSubmit={handleSubmit} className="sign-form">
           <StyledFormControl fullWidth variant='standard'>
-            <InputLabel htmlFor='name'>name</InputLabel>
+            <InputLabel htmlFor='name'><FormattedMessage id="signing-page.register1" /></InputLabel>
             <Input id='name' type='text' required inputRef={nameRef} />
           </StyledFormControl>
           <StyledFormControl fullWidth variant='standard'>
@@ -65,14 +66,14 @@ const Register = () => {
             <Input id='email' type='email' required inputRef={emailRef} />
           </StyledFormControl>
           <StyledFormControl fullWidth variant='standard'>
-            <InputLabel htmlFor='password'>password</InputLabel>
+            <InputLabel htmlFor='password'><FormattedMessage id="signing-page.login1" /></InputLabel>
             <Input id='password' type='password' required inputRef={passwordRef} />
           </StyledFormControl>
           <StyledFormControl fullWidth variant='standard'>
-            <InputLabel htmlFor='passwordConf'>confirm password</InputLabel>
+            <InputLabel htmlFor='passwordConf'><FormattedMessage id="signing-page.register2" /></InputLabel>
             <Input id='passwordConf' type='password' required inputRef={passwordConfRef} />
           </StyledFormControl>
-          <Button fullWidth type='submit' variant="contained" disabled={loading} sx={{ marginTop: "15px" }}>Register</Button>
+          <Button fullWidth type='submit' variant="contained" disabled={loading} sx={{ marginTop: "15px" }}><FormattedMessage id="navbar.button4" /></Button>
         </form>
       </StyledPaper>
     </StyledBox>

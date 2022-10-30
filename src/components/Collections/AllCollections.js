@@ -6,6 +6,7 @@ import { Box, Skeleton, Typography, useMediaQuery, useTheme, styled, Paper, Butt
 import Grid from "@mui/material/Unstable_Grid2";
 import Comments from './Comments';
 import axios from 'axios';
+import { FormattedMessage } from 'react-intl';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     width: "90%",
@@ -36,7 +37,7 @@ const AllCollections = ({ collections }) => {
     if (collections === null) {
         return (
             <StyledBox>
-                <Typography variant={variant} sx={{ marginBottom: "10px" }}>Collections</Typography>
+                <Typography variant={variant} sx={{ marginBottom: "10px" }}><FormattedMessage id="collection-all.header" /></Typography>
                 <Typography variant='h1'>
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }} />
                     <Skeleton variant="rounded" sx={{ marginBottom: "10px" }} />
@@ -48,7 +49,7 @@ const AllCollections = ({ collections }) => {
     } else {
         return (
             <StyledBox>
-                <Typography variant={variant} sx={{ marginBottom: "10px" }}>Collections</Typography>
+                <Typography variant={variant} sx={{ marginBottom: "10px" }}><FormattedMessage id="collection-all.header" /></Typography>
                 <Grid container spacing={{ xs: 2, sm: 3 }} columns={{ xs: 4, md: 8 }}>
                     {collections.map((el) => (
                         <Grid xs={4} md={4} key={el.idcollection}>
@@ -61,7 +62,7 @@ const AllCollections = ({ collections }) => {
                                         <Typography variant="body2">{el.author}</Typography>
                                     </CardContent>
                                     <CardActions  sx={{ paddingTop: "0" }}>
-                                        <Button size="small" onClick={(() => navigate(`/items/${el.idcollection}`))}>See collection</Button>
+                                        <Button size="small" onClick={(() => navigate(`/items/${el.idcollection}`))}><FormattedMessage id="collection-all.card" /></Button>
                                     </CardActions>
                                     <Comments collection={el.idcollection} authState={authState} listOfLikes={listOfLikes} setCounter={setCounter} />
                                 </Card>
