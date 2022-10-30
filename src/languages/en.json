@@ -6,6 +6,7 @@
     "admin-toolbar.button3": "Remove admin",
     "admin-toolbar.button4": "Add admin",
     "admin-toolbar.button5": "Delete",
+    "collection-user.add": "Add collection",
     "collection-add.label1": "Name",
     "collection-add.label2": "Description",
     "collection-add.input1": "Topic",

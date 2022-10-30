@@ -6,6 +6,7 @@ import AllCollections from './AllCollections';
 
 const Collections = () => {
   const [collections, setCollections] = useState(null);
+  const [collectionsCounter, setCollectionsCounter] = useState(0);
   const { serverURL } = useContext(ServerContext);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const Collections = () => {
       .catch((err) => {
         console.log(err);
       })
-  },[])
+  },[collectionsCounter])
 
   return (
     <Box
@@ -28,7 +29,7 @@ const Collections = () => {
         alignItems: "center"
     }}
     >
-      <AllCollections collections={collections} />
+      <AllCollections collections={collections} setCollectionsCounter={setCollectionsCounter} />
     </Box>
   )
 }

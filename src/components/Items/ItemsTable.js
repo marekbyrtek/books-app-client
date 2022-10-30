@@ -74,7 +74,7 @@ const ItemsTable = ({ listOfItems, setCounter, user }) => {
                               <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
                               <StyledTableCell>{row.tags}</StyledTableCell>
                               <StyledTableCell align="right">
-                                {(authState.id === user) && (
+                                {(authState.id === user || authState.isAdmin) && (
                                   <IconButton color="error" size='small' sx={{ padding: 0 }} onClick={() => handleDetele(row.id)}>
                                     <Clear />
                                   </IconButton>

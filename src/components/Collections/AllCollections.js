@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
 import { Box, Skeleton, Typography, useMediaQuery, useTheme, styled, Paper, Button, Card, CardContent, CardActions, IconButton } from '@mui/material';
+import { Clear } from '@mui/icons-material';
 import Grid from "@mui/material/Unstable_Grid2";
 import Comments from './Comments';
 import axios from 'axios';
@@ -15,7 +16,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
     }
 }))
 
-const AllCollections = ({ collections }) => {
+const AllCollections = ({ collections, setCollectionsCounter }) => {
     const [listOfLikes, setListOfLikes] = useState([]);
     const [counter, setCounter] = useState(0);
     const navigate = useNavigate();
@@ -33,6 +34,12 @@ const AllCollections = ({ collections }) => {
             })
             .catch((err) => console.log(err))
     },[counter])
+
+    const handleDetele = (id) => {
+        axios.post(`${serverURL}/api/collection/delete`, { idcollection: id })
+        .then((resp) => setCollectionsCounter((prev) => prev + 1))
+        .catch((err) => console.log(err))
+    }
 
     if (collections === null) {
         return (
@@ -56,7 +63,14 @@ const AllCollections = ({ collections }) => {
                             <Paper elevation="4">
                                 <Card>
                                     <CardContent>
-                                        <Typography variant={variant}>{el.name}</Typography>
+                                        <CardActions sx={{ padding: "0", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+                                            <Typography variant={variant}>{el.name}</Typography>
+                                            {authState.isAdmin && (
+                                                <IconButton color="error" size='small' sx={{ padding: 0 }} onClick={() => handleDetele(el.idcollection)}>
+                                                    <Clear />
+                                                </IconButton>
+                                            )}
+                                        </CardActions>
                                         <Typography color="text.secondary">{el.topic}</Typography>
                                         <Typography variant="body2">{el.description}</Typography>
                                         <Typography variant="body2">{el.author}</Typography>
