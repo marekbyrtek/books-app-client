@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { CardContent, Collapse, Typography, styled, IconButton, CardActions, Skeleton, List, ListItem, ListItemText, Divider, Button } from '@mui/material';
 import { FavoriteBorder, Favorite, Comment } from "@mui/icons-material";
+import { red } from '@mui/material/colors';
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
 import CommentsAdd from './CommentsAdd';
@@ -70,7 +71,7 @@ const Comments = ({ collection, authState, listOfLikes, setCounter }) => {
             <CardActions sx={{ paddingTop: "0", display: "flex", justifyContent: "space-between" }}>
                 {authState.status && (
                     <IconButton onClick={handleLike}>
-                        {listOfLikes.includes(collection) ? (<Favorite />) : (<FavoriteBorder />)}
+                        {listOfLikes.includes(collection) ? (<Favorite htmlColor={red[500]} />) : (<FavoriteBorder />)}
                     </IconButton>
                 )}
                 <ExpandMore

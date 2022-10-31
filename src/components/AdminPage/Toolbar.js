@@ -90,7 +90,7 @@ const Toolbar = ({ users, setCounter }) => {
         setLoading(true);
         users.map((el) => {
             axios.post(`${serverURL}/api/users/delete`, {idusers: el})
-                .then((res) => console.log(res))
+                .then((res) => res)
                 .catch((err) => console.log(err))
         })
         if (users.includes(authState.id)) {
