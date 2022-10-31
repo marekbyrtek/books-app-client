@@ -4,13 +4,19 @@ import axios from 'axios';
 import { ServerContext } from '../../context/ServerContext';
 import { FormattedMessage } from 'react-intl';
 
-const ModalBox = styled(Box)({
+const ModalBox = styled(Box)(({ theme }) => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: "60%",
-})
+    [theme.breakpoints.down("md")]: {
+        width: "75%"
+    },
+    [theme.breakpoints.down("sm")]: {
+        width: "90%"
+    }
+}))
 
 const StyledFormControl = styled(FormControl)({
     margin: "15px 0"
@@ -58,7 +64,7 @@ const AddItem = ({ open, handleClose, collection, setCounter }) => {
             aria-describedby="modal-description"
         >
             <ModalBox>
-                <Paper sx={{ border: `2px solid ${theme.palette.text.secondary}` }}>
+                <Paper sx={{ border: `2px solid ${theme.palette.text.secondary}`, padding: "30px" }}>
                     {error && <Alert severity="error">{error}</Alert>}
                     <form onSubmit={handleSubmit} className="sign-form">
                         <StyledFormControl fullWidth variant='standard'>
@@ -73,7 +79,7 @@ const AddItem = ({ open, handleClose, collection, setCounter }) => {
                         <StyledFormControl fullWidth variant='standard'>
                             <TextField id='tag3' label="tag" variant="standard" inputRef={tag3Ref} />
                         </StyledFormControl>
-                        <Button fullWidth type='submit' variant='contained' disabled={loading} sx={{ marginTop: "15px" }}><FormattedMessage id="items.button" /></Button>
+                        <Button type='submit' variant='contained' disabled={loading} size="large" sx={{ marginTop: "15px", alignSelf: "flex-end" }}><FormattedMessage id="items.button" /></Button>
                     </form>
                 </Paper>
             </ModalBox>
