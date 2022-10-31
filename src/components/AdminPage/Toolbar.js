@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Box, useTheme, useMediaQuery } from '@mui/material
 import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
 import axios from 'axios';
+import localStorageKeys from "../../config/localStorageKeys";
 import { FormattedMessage } from 'react-intl';
 
 const Toolbar = ({ users, setCounter }) => {
@@ -33,7 +34,7 @@ const Toolbar = ({ users, setCounter }) => {
             axiosPut("/api/users/block", el)
         })
         if (users.includes(authState.id)) {
-            localStorage.removeItem("accessToken");
+            localStorage.removeItem(localStorageKeys.TOKEN);
             setAuthState({
             id: 0,
             email: "",
@@ -65,7 +66,7 @@ const Toolbar = ({ users, setCounter }) => {
         if (users.includes(authState.id)) {
             axios.post(`${serverURL}/api/users/newtoken/${authState.id}`)
                 .then((resp) => {
-                    localStorage.setItem("accessToken", resp.data.token);
+                    localStorage.setItem(localStorageKeys.TOKEN, resp.data.token);
                     setAuthState({ ...authState, isAdmin: false })
                     navigate("/");
                 })
@@ -93,7 +94,7 @@ const Toolbar = ({ users, setCounter }) => {
                 .catch((err) => console.log(err))
         })
         if (users.includes(authState.id)) {
-            localStorage.removeItem("accessToken");
+            localStorage.removeItem(localStorageKeys.TOKEN);
             setAuthState({
             id: 0,
             email: "",

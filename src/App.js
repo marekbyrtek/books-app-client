@@ -29,7 +29,7 @@ const messages = {
 }
 
 function App() {
-  const [mode, setMode] = useState(((localStorage.getItem("mode") === "light") || (localStorage.getItem("mode") === "dark")) ? localStorage.getItem("mode") : "light");
+  const [mode, setMode] = useState(localStorage.getItem(localStorageKeys.MODE) || "light");
   const [locale, setLocale] = useState(localStorage.getItem(localStorageKeys.LOCALIZATION) || locales.EN);
 
   const setLocalization = (value) => {
@@ -37,11 +37,6 @@ function App() {
     localStorage.setItem(localStorageKeys.LOCALIZATION, value);
   }
 
-  useEffect(() => {
-    if (localStorage.getItem("mode") === null) {
-      localStorage.setItem("mode", "light");
-    }
-  },[])
   const [serverURL, setServerURL] = useState("https://books-app-server-mysql.herokuapp.com");
   const { authState, setAuthState } = useContext(AuthContext);
 
@@ -54,7 +49,7 @@ function App() {
   useEffect(() => {
     axios.get(`${serverURL}/api/auth`, {
       headers: {
-        accessToken: localStorage.getItem("accessToken")
+        accessToken: localStorage.getItem(localStorageKeys.TOKEN)
       }
     })
     .then((response) => {

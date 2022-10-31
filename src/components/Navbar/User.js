@@ -3,6 +3,7 @@ import AuthContext from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import NotLogedIn from './NotLogedIn';
 import LogedIn from './LogedIn';
+import localStorageKeys from "../../config/localStorageKeys";
 
 const User = () => {
   const { authState, setAuthState } = useContext(AuthContext);
@@ -10,7 +11,7 @@ const User = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem(localStorageKeys.TOKEN);
     setAuthState({
       id: 0,
       email: "",

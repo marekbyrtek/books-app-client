@@ -5,6 +5,7 @@ import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
 import { ServerContext } from '../../context/ServerContext';
 import { FormattedMessage } from 'react-intl';
+import localStorageKeys from "../../config/localStorageKeys";
 
 const StyledBox = styled(Box)({
   display: "flex",
@@ -40,7 +41,7 @@ const Login = () => {
     setLoading(true);
     axios.post(`${serverURL}/api/users/login`, data)
       .then((resp) => {
-        localStorage.setItem("accessToken", resp.data.token);
+        localStorage.setItem(localStorageKeys.TOKEN, resp.data.token);
         setAuthState({
           id: resp.data.user.idusers,
           email: resp.data.user.email,

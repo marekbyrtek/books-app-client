@@ -5,6 +5,7 @@ import { Home, DarkMode, CollectionsBookmark, Translate } from '@mui/icons-mater
 import { useNavigate } from 'react-router-dom';
 import AdminLink from './AdminLink';
 import { FormattedMessage } from 'react-intl';
+import localStorageKeys from "../../config/localStorageKeys";
 import LanguageContext from "../../context/LanguageContext";
 import locales from '../../config/locales';
 
@@ -58,10 +59,10 @@ const Sidebar = () => {
                 <Switch checked={mode === "dark"} onChange={() => {
                   if (mode === "light") {
                     setMode("dark");
-                    localStorage.setItem("mode", "dark")
+                    localStorage.setItem(localStorageKeys.MODE, "dark")
                   } else {
                     setMode("light");
-                    localStorage.setItem("mode", "light")
+                    localStorage.setItem(localStorageKeys.MODE, "light")
                   }
                 }} />
               </ListItemButton>

@@ -5,6 +5,7 @@ import AuthContext from '../../context/AuthContext';
 import { Box, styled, Tooltip, IconButton, Menu, MenuItem, ListItemButton, ListItemIcon, Switch } from '@mui/material';
 import { MoreVert, Home, DarkMode, CollectionsBookmark, AdminPanelSettings, Translate } from '@mui/icons-material';
 import { FormattedMessage } from 'react-intl';
+import localStorageKeys from "../../config/localStorageKeys";
 import LanguageContext from '../../context/LanguageContext';
 import locales from '../../config/locales';
 
@@ -127,10 +128,10 @@ const Sidemenu = () => {
                             <Switch checked={mode === "dark"} onChange={() => {
                                 if (mode === "light") {
                                     setMode("dark");
-                                    localStorage.setItem("mode", "dark")
+                                    localStorage.setItem(localStorageKeys.MODE, "dark")
                                 } else {
                                     setMode("light");
-                                    localStorage.setItem("mode", "light")
+                                    localStorage.setItem(localStorageKeys.MODE, "light")
                                 }
                             }}
                             />
